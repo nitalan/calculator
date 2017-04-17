@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "port": 8000,
+  "restlogSizeLimit": 1024,
+  "restlogFileLimit": 20,
+  "mysqlThreshold": 20000000,
+  "mysqlClearNum": 2000000,
+  "mysqlClearInterval": 86400000,
+  "dbConfig": {
+    "rootpwd": "root",
+    "dialect": "mysql",
+    "database": "calcu",
+    "username": "calcu",
+    "password": "calcu",
+    "host": "localhost",
+    "port": 3306,
+    "pool": {
+      "max": 100,
+      "min": 0,
+      "idle": 10000
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "calculator for credits",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YunNeverMore/calculator.git"
+  },
+  "author": "Yun Peng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YunNeverMore/calculator/issues"
+  },
+  "homepage": "https://github.com/YunNeverMore/calculator#readme",
+  "dependencies": {
+    "koa": "",
+    "koa-bodyparser": "",
+    "koa-router": "",
+    "mime": "",
+    "mz": "",
+    "sequelize": "",
+    "mysql": "",
+    "js-yaml": "",
+    "winston": ""
+  },
+  "devDependencies": {
+    "mocha": "",
+    "deep-equal": ""
+  }
+}
