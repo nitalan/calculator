@@ -33,6 +33,9 @@ exp.restify = () => {
           message: '',
           result: data
         }
+        //ctx.response.header['Access-Control-Allow-Origin'] ='*';
+        //ctx.response.header['Access-Control-Allow-Headers'] ='Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With';
+        //ctx.response.header['Access-Control-Allow-Methods'] ='GET, PUT, POST, DELETE';
       }
       try {
         await next();

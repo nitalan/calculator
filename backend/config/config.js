@@ -13,7 +13,7 @@ const yaml = require('js-yaml');
 const fs = require('fs');
 
 let config = {
-  log: __dirname + '/app.log';
+  log: __dirname + '/../logs/app.log'
 };
 
 config = Object.assign(config, require(defaultConfig));

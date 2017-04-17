@@ -11,11 +11,11 @@
 const moment = require('moment');
 const Errors = require('./catchError.js');
 
+let exp = {};
+
 exp.PATHPREFIX = '/api';
 exp.LONGLONG_AGO = '1994-01-01T01:01:01.111Z';
 exp.LONGLONG_LATER = '2050-02-02T02:02:02.222Z';
-
-let exp = {};
 
 exp.validateTimeRange = (start, end) => {
   start = start !== undefined ? start : exp.LONGLONG_AGO;
@@ -56,7 +56,7 @@ exp.deleteForClear = (model, modelName) => {
   };
 }
 
-exp.fakeObj(obj) => {
+exp.fakeObj = (obj) => {
   for (let key in obj) {
     if (typeof obj[key] === 'object') {
       exp.fakeObj(obj[key])

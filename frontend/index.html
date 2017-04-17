@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+    body {
+      top: 0;
+    }
+    a:hover {
+      outline: none;
+      text-decoration: none;
+      color:
+    }
+    .header {
+      width: 100%;
+      height: 10%;
+      border-bottom: 1px solid #E2E2E2;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      top: 0;
+      margin: 0 !important;
+      margin-bottom: 30px !important;
+      font-size: 22px;
+      padding: 20px 200px;
+    }
+    .row {
+      margin: 10px 20px;
+      padding-left: 200px;
+    }
+    label{
+      font-size: 16px;
+      font-weight: 400;
+    }
+    .title {
+      width: 100px;
+      color: #56AAC3;
+    }
+    .scroreBox{
+      margin-left: 30px;
+      color: #56AAC3;
+    }
+    .dropdown-btn{
+      width: 400px !important;
+    }
+    .dropdown-menu{
+      width: 400px !important;
+    }
+    .dropdown {
+      padding: 0;
+    }
+    .btn {
+
+    }
+    .btn:focus {
+      outline: none !important;
+    }
+    .calBtn{
+      color: #fff;
+      background: #68B5CB;
+      font-weight: 200;
+      border-radius: 3px;
+      border: 0;
+    }
+    .calBtn:hover{
+      color: #fff;
+      background: #68B5CB;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+    }
+    .calBtn:focus{
+      color: #fff;
+      background: #68B5CB;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+    }
+    .cardBox {
+      margin-right: 100px;
+    }
+    .cardBox .btn {
+      width: 150px !important;
+    }
+    .cardBox .dropdown-menu {
+      width: 150px !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="header row">
+    <div class="title col-md-2">
+      <a href="">calculator</a>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="dropdown cardBox col-md-1">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Choose
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="###">Card 1</a></li>
+        <li><a href="###">Card 2</a></li>
+        <li><a href="###">Card 3</a></li>
+        <li><a href="###">Card 4</a></li>
+        <li><a href="###">Card 5</a></li>
+        <li><a href="###">Card 6</a></li>
+      </ul>
+    </div>
+    <div class="col-md-1">
+      <button type="button" class="btn btn-default calBtn">Calculate</button>
+    </div>
+    <div class="col-md-1 scroreBox hide">
+      0
+    </div>
+  </div>
+  <div class="body container">
+  </div>
+  <script>
+  let schema, nums = 0;
+
+  function getElementText(ele) {
+    return ele.find(".btn:first-child").text().trim();
+  }
+
+  function calculate() {
+    let id = 0, result = 0;
+    for (let catalog in schema) {
+      for (let key in schema[catalog].data) {
+        let content = schema[catalog].data[key].data;
+        let op = getElementText($('#block' + id));
+        let val = content[op];
+        let vals = val;
+        if (typeof vals === 'object') {
+          let index = parseInt(getElementText($('.cardBox')).substring(5)) - 1;;
+          val = vals[index];
+        }
+        result += val;
+        id++;
+      }
+    }
+    return result;
+  }
+
+  function fake() {
+    for (let i = 0; i < nums; i++) {
+      $('#block' + i).find("li:first-child").find('a').click();
+    }
+  }
+
+  $.get('http://localhost:8000/api/schema', {}, function(data){
+    if (data.error) {
+      console.log(data.error);
+      return;
+    }
+    schema = data.result;
+    console.log(schema);
+    let id = 0;
+    for (let catalog in schema) {
+      for (let key in schema[catalog].data) {
+        let div = `
+          <div class="block row" id="block` + id + `">
+            <div class="col-md-4 labelBox">
+                <label for="">
+                 ` + schema[catalog].data[key].name + `
+                </label>
+            </div>
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-7 dropdown">
+              <button class="btn btn-default dropdown-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Choose
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              </ul>
+            </div>
+          </div>
+        `
+        id++;
+        $('.body').append(div);
+        let newBlock = $('.body').find('.row:last-child').find('.dropdown-menu');
+        let content = schema[catalog].data[key].data;
+        for (let op in content) {
+          newBlock.append("<li><a href='####'>" + op + "</a></li>");
+        }
+      }
+    }
+    nums = id;
+    $(".dropdown-menu li a").click(function() {
+      let cur = $(this).parent().parent().parent().find(".btn:first-child");
+      cur.html($(this).text() + "<span class='caret'></span>");
+      cur.val($(this).text());
+    });
+    $('.calBtn').click(function() {
+      if (getElementText($('.cardBox')) === 'Choose') return;
+      for (let i = 0; i < nums; i++) {
+        if (getElementText($('#block' + i)) === 'Choose') {
+          return;
+        }
+      }
+      $('.scroreBox').text(calculate());
+      $('.scroreBox').removeClass('hide');
+    });
+  });
+  </script>
+</body>
+</html>

@@ -4,6 +4,8 @@
   "description": "calculator for credits",
   "main": "app.js",
   "scripts": {
+    "start": "node --use_strict --harmony-async-await app.js",
+    "dev": "NODE_ENV=dev node --use_strict --harmony-async-await app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,7 +27,8 @@
     "sequelize": "",
     "mysql": "",
     "js-yaml": "",
-    "winston": ""
+    "winston": "",
+    "koa-cors": ""
   },
   "devDependencies": {
     "mocha": "",
